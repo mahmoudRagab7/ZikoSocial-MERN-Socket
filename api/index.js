@@ -34,7 +34,7 @@ app.use("/images", express.static(path.join(__dirname, "public/images")));
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
-app.use(cors({ origin: "http://localhost:3000" })); // Allow requests from frontend
+app.use(cors({ origin: "https://zikosocial-frontend.onrender.com/" })); // Allow requests from frontend
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
