@@ -28,7 +28,7 @@ export default function Post({ post, onDelete }) {
   useEffect(() => {
     const fetchUser = async () => {
       const res = await axios.get(
-        `http://localhost:8800/api/users?userId=${post.userId}`
+        `https://zikosocial.onrender.com/api/users?userId=${post.userId}`
       );
       setUser(res.data);
     };
@@ -37,7 +37,7 @@ export default function Post({ post, onDelete }) {
 
   const likeHandler = () => {
     try {
-      axios.put(`http://localhost:8800/api/posts/${post._id}/like`, {
+      axios.put(`https://zikosocial.onrender.com/api/posts/${post._id}/like`, {
         userId: currentUser._id,
       });
     } catch (error) {}
@@ -56,7 +56,7 @@ export default function Post({ post, onDelete }) {
   // Handle Delete
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8800/api/posts/${post._id}`, {
+      await axios.delete(`https://zikosocial.onrender.com/api/posts/${post._id}`, {
         data: { userId: currentUser._id }, // Pass the userId for authorization
       });
       onDelete(post._id); // Call the parent component's onDelete to remove the post from the UI
