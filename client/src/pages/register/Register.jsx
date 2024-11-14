@@ -43,7 +43,7 @@ export default function Register() {
       formData.append("profilePicture", user.profilePicture); // Append the profile picture
 
       try {
-        await axios.post("http://localhost:8800/api/auth/register", formData, {
+        await axios.post("https://zikosocial.onrender.com/api/auth/register", formData, {
           headers: {
             "Content-Type": "multipart/form-data", // Set the appropriate content-type
           },
