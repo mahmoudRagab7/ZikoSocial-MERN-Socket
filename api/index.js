@@ -30,16 +30,18 @@ mongoose
 
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
-//   middleware
+// middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
-app.use(cors({
-  origin: "https://zikosocial-frontend.onrender.com", // Allow requests from this origin
-  credentials: true, // Include credentials if needed (e.g., cookies)
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed methods if necessary
-  allowedHeaders: "Content-Type,Authorization", // Specify allowed headers if necessary
-}));
+app.use(
+  cors({
+    origin: "https://zikosocial-frontend.onrender.com", // Allow requests from frontend
+    credentials: true, // Include credentials if needed (cookies)
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these methods
+    allowedHeaders: "Content-Type,Authorization", // Allow specific headers
+  })
+); // Allow requests from frontend
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -66,5 +68,5 @@ app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 
 app.listen(port, () => {
-  console.log(`running successfully on port ${port}`);
+  console.log(`Running successfully on port ${port}`);
 });
