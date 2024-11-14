@@ -17,8 +17,11 @@ const cors = require("cors"); // Import cors
 
 dotenv.config();
 
+const url = process.env.MONGO_URL;
+// const url = process.env.DB_CONNECTION_URL;
+
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

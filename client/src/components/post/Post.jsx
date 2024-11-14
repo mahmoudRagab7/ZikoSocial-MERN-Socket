@@ -16,6 +16,8 @@ export default function Post({ post, onDelete }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  console.log(PF + "----");
+
   const { user: currentUser } = useContext(AuthContext);
   const navigate = useNavigate(); // Initialize useNavigate for redirection
 
