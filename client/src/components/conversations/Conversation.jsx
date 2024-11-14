@@ -13,7 +13,7 @@ export default function Conversation({ conversation, currentUser }) {
     const getUser = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/api/users/?userId=" + friendId
+          "https://zikosocial.onrender.com/api/users/?userId=" + friendId
         );
         setUser(res.data);
       } catch (error) {
