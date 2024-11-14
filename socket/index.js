@@ -1,6 +1,8 @@
-const io = require("socket.io")(8900, {
+require("dotenv").config(); // Load environment variables from .env file
+
+const io = require("socket.io")(process.env.PORT || 8900, {
   cors: {
-    origin: "https://zikosocial-frontend.onrender.com",
+    origin: process.env.FRONTEND_URL || "http://localhost:3000", // Use env variable or fallback for local development
   },
 });
 
@@ -20,25 +22,26 @@ const getUser = (userId) => {
 };
 
 io.on("connection", (socket) => {
-  //when ceonnect
   console.log("a user connected.");
 
-  //take userId and socketId from user
+  // Add user to the list when they connect
   socket.on("addUser", (userId) => {
     addUser(userId, socket.id);
     io.emit("getUsers", users);
   });
 
-  //send and get message
+  // Handle sending and receiving messages
   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
     const user = getUser(receiverId);
-    io.to(user.socketId).emit("getMessage", {
-      senderId,
-      text,
-    });
+    if (user) {
+      io.to(user.socketId).emit("getMessage", {
+        senderId,
+        text,
+      });
+    }
   });
 
-  //when disconnect
+  // Remove user from the list when they disconnect
   socket.on("disconnect", () => {
     console.log("a user disconnected!");
     removeUser(socket.id);
