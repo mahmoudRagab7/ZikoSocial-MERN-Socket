@@ -18,7 +18,6 @@ const cors = require("cors"); // Import cors
 dotenv.config();
 
 const url = process.env.MONGO_URL;
-// const url = process.env.DB_CONNECTION_URL;
 
 mongoose
   .connect(url, {
@@ -37,11 +36,14 @@ app.use(morgan("common"));
 app.use(
   cors({
     origin: "https://zikosocial-frontend.onrender.com", // Allow requests from frontend
-    credentials: true, // Include credentials if needed (cookies)
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these methods
-    allowedHeaders: "Content-Type,Authorization", // Allow specific headers
+    credentials: true, // Include credentials (cookies) if needed
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed methods
+    allowedHeaders: "Content-Type,Authorization", // Specify allowed headers
   })
-); // Allow requests from frontend
+);
+
+// Ensure OPTIONS request is handled properly
+app.options("*", cors()); // Pre-flight request handling
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
