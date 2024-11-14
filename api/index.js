@@ -41,7 +41,6 @@ const storage = multer.diskStorage({
     cb(null, "public/images");
   },
   filename: (req, file, cb) => {
-    // cb(null, file.originalname); // for postman uploads
     cb(null, req.body.name);
   },
 });
@@ -62,5 +61,5 @@ app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 
 app.listen(port, () => {
-  console.log(`running succefully on port ${port}`);
+  console.log(`running successfully on port ${port}`);
 });
