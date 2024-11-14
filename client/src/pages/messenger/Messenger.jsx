@@ -22,7 +22,7 @@ export default function Messenger() {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("wss://zikosocial.onrender.com");
     socket.current.on("getMessage", (data) => {
       // console.log("Message received:", data);
       setArrivalMessage({
