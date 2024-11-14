@@ -18,16 +18,16 @@ export default function Feed({ username }) {
       if (location.pathname === "/timeline") {
         // Fetch posts for timeline (user's posts)
         res = await axios.get(
-          "http://localhost:8800/api/posts/timeline/" + user._id
+          "https://zikosocial.onrender.com/api/posts/timeline/" + user._id
         );
       } else if (username) {
         // Fetch posts for a specific user's profile
         res = await axios.get(
-          "http://localhost:8800/api/posts/profile/" + username
+          "https://zikosocial.onrender.com/api/posts/profile/" + username
         );
       } else {
         // Fetch posts for home page (general feed)
-        res = await axios.get("http://localhost:8800/api/posts/");
+        res = await axios.get("https://zikosocial.onrender.com/api/posts/");
       }
 
       setPosts(
