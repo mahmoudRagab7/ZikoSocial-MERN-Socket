@@ -29,7 +29,7 @@ export default function Rightbar({ user }) {
       }
       try {
         const friendList = await axios.get(
-          "http://localhost:8800/api/users/friends/" + user._id
+          "https://zikosocial.onrender.com/api/users/friends/" + user._id
         );
         setFriends(friendList.data); // Update friends using context's setter
       } catch (error) {
@@ -43,13 +43,13 @@ export default function Rightbar({ user }) {
     try {
       if (followed) {
         await axios.put(
-          "http://localhost:8800/api/users/" + user._id + "/unfollow",
+          "https://zikosocial.onrender.com/api/users/" + user._id + "/unfollow",
           { userId: currentUser._id }
         );
         dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
         await axios.put(
-          "http://localhost:8800/api/users/" + user._id + "/follow",
+          "https://zikosocial.onrender.com/api/users/" + user._id + "/follow",
           { userId: currentUser._id }
         );
         dispatch({ type: "FOLLOW", payload: user._id });
@@ -63,13 +63,13 @@ export default function Rightbar({ user }) {
   const handleMessageClick = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8800/api/conversations/find/${currentUser._id}/${user._id}`
+        `https://zikosocial.onrender.com/api/conversations/find/${currentUser._id}/${user._id}`
       );
 
       if (!response.data) {
         // If no conversation found, create a new one
         const newConversation = await axios.post(
-          "http://localhost:8800/api/conversations/",
+          "https://zikosocial.onrender.com/api/conversations/",
           {
             senderId: currentUser._id,
             receiverId: user._id,
